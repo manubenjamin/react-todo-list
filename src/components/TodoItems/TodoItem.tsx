@@ -48,7 +48,7 @@ const TodoItem: React.FC<ItemProps> = ({
         <ListItemIcon>
           <Checkbox
             edge="start"
-            checked={todo.status === "completed" ? true : false}
+            checked={todo.completed ? true : false}
             onChange={() => console.log(todo)}
             tabIndex={-1}
             disableRipple

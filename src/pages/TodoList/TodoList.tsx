@@ -4,25 +4,11 @@ import { TodoItems } from "../../components/TodoItems";
 import { useNavigate } from "react-router-dom";
 import ConfirmationWindow from "../../components/ConfirmationWindow";
 import { Button } from "@mui/material";
+import { useSelector } from "react-redux";
+import { State } from "../../models/state";
 
 const TodoList: React.FC = () => {
-  const [todos] = useState<Todo[]>([
-    {
-      id: "3232",
-      todoName: "New todo",
-      status: "pending",
-    },
-    {
-      id: "3d232",
-      todoName: "New todo 2",
-      status: "completed",
-    },
-    {
-      id: "3d2d32",
-      todoName: "New todo 2",
-      status: "completed",
-    },
-  ]);
+  const todos = useSelector((state: State) => state.todos);
   const navigate = useNavigate();
   const [showDeletePrompt, setShowdeletePrompt] = useState(false);
   const [selectedTodo, setSelectedTodo] = useState<Todo>();

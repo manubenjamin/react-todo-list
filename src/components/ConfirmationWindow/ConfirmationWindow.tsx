@@ -32,10 +32,10 @@ const ConfirmationWindow: React.FC<ConfirmProps> = ({
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="secondary">
+          <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleConfirm} autoFocus>
+          <Button onClick={handleConfirm} autoFocus color="error">
             Confirm
           </Button>
         </DialogActions>
