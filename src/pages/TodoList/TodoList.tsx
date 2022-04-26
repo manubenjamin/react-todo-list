@@ -4,14 +4,20 @@ import { TodoItems } from "../../components/TodoItems";
 import { useNavigate } from "react-router-dom";
 import ConfirmationWindow from "../../components/ConfirmationWindow";
 import { Button } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../models/state";
+import { deleteTodo } from "../../actions/todoAction";
 
 const TodoList: React.FC = () => {
   const todos = useSelector((state: State) => state.todos);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [showDeletePrompt, setShowdeletePrompt] = useState(false);
-  const [selectedTodo, setSelectedTodo] = useState<Todo>();
+  const [selectedTodo, setSelectedTodo] = useState<Todo>({
+    id: "",
+    todoName: "",
+    completed: false,
+  });
 
   const handleToggle = (todo: Todo) => {};
 
@@ -30,7 +36,7 @@ const TodoList: React.FC = () => {
 
   const handleDeleteAction = () => {
     setShowdeletePrompt(false);
-    console.log(selectedTodo);
+    dispatch(deleteTodo(selectedTodo && selectedTodo.id));
   };
 
   return (

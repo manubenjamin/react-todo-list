@@ -3,24 +3,34 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import TodoForm from "../../components/TodoForm";
 import { Button } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "../../models/state";
+import { updateTodo } from "../../actions/todoAction";
 
 const validationSchema = yup.object({
   todoName: yup.string().required("Todo is required"),
 });
 
 const EditTodo: React.FC = () => {
+  const todos = useSelector((state: State) => state.todos);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  let { id } = useParams();
+  const filteredTodo = todos.filter((todo) => todo.id === id);
+  let todo = filteredTodo && filteredTodo[0];
+
   const formik = useFormik({
     initialValues: {
-      todoName: "",
+      todoName: todo?.todoName,
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      todo.todoName = values.todoName;
+      dispatch(updateTodo(todo));
+      navigate("/");
     },
   });
-
-  const navigate = useNavigate();
 
   const handleCancel = () => {
     navigate(`/`);
