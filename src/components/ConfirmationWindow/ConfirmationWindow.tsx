@@ -28,7 +28,7 @@ const ConfirmationWindow: React.FC<ConfirmProps> = ({
         <DialogTitle id="alert-dialog-title">{"Are you sure?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            You are about to delete this todo item. This cannot ne undone.
+            You are about to delete this todo item. This cannot be undone.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
