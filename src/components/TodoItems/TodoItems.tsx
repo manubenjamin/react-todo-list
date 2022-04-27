@@ -28,9 +28,15 @@ const TodoItems: React.FC<ItemProps> = ({
     );
   });
 
+  const emptyList =
+    todos && todos.length === 0 ? (
+      <div className="pa3 f6">No items available</div>
+    ) : undefined;
+
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }}>
       {todoItemsSection}
+      {emptyList}
     </List>
   );
 };

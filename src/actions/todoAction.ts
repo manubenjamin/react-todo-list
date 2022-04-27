@@ -1,5 +1,5 @@
 import { Todo } from "../models/todo";
-import { ADD_TODO, DELETE_TODO, UPDATE_TODO } from "./types";
+import { ADD_TODO, DELETE_TODO, MARK_STATUS, UPDATE_TODO } from "./types";
 
 export const addTodo = (todo: Todo) => {
   return {
@@ -18,6 +18,13 @@ export const deleteTodo = (id: string) => {
 export const updateTodo = (todo: Todo) => {
   return {
     type: UPDATE_TODO,
+    payload: todo,
+  };
+};
+
+export const markStatusTodo = (todo: Todo) => {
+  return {
+    type: MARK_STATUS,
     payload: todo,
   };
 };

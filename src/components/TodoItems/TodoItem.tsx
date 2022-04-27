@@ -6,7 +6,7 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import { EditOutlined, DeleteOutline } from "@mui/icons-material";
 import { Todo } from "../../models/todo";
-import React from "react";
+import React, { useState } from "react";
 
 interface ItemProps {
   todo: Todo;
@@ -21,6 +21,8 @@ const TodoItem: React.FC<ItemProps> = ({
   handleEdit,
   handleDelete,
 }) => {
+  const [checked, setChecked] = useState(todo.completed);
+  const markCompletedStyle = checked ? "strike" : "";
   return (
     <ListItem
       key={todo.id}
@@ -29,6 +31,7 @@ const TodoItem: React.FC<ItemProps> = ({
           <IconButton
             edge="end"
             aria-label="edit"
+            className="item-btns"
             onClick={() => handleEdit(todo)}
           >
             <EditOutlined fontSize="small" />
@@ -36,6 +39,7 @@ const TodoItem: React.FC<ItemProps> = ({
           <IconButton
             edge="end"
             aria-label="delete"
+            className="item-btns"
             onClick={() => handleDelete(todo)}
           >
             <DeleteOutline fontSize="small" />
@@ -44,18 +48,30 @@ const TodoItem: React.FC<ItemProps> = ({
       }
       disablePadding
     >
-      <ListItemButton role={undefined} onClick={() => handleToggle(todo)} dense>
+      <ListItemButton role={undefined} dense>
         <ListItemIcon>
           <Checkbox
             edge="start"
-            checked={todo.completed ? true : false}
-            onChange={() => console.log(todo)}
+            checked={checked}
+            onChange={() => {
+              handleToggle(todo);
+              setChecked(!checked);
+            }}
             tabIndex={-1}
             disableRipple
             inputProps={{ "aria-labelledby": todo.id }}
           />
         </ListItemIcon>
-        <ListItemText id={todo.id}>{todo.todoName}</ListItemText>
+        <ListItemText
+          id={todo.id}
+          onClick={() => {
+            handleToggle(todo);
+            setChecked(!checked);
+          }}
+          className={`${markCompletedStyle}`}
+        >
+          {todo.todoName}
+        </ListItemText>
       </ListItemButton>
     </ListItem>
   );

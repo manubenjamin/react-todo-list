@@ -1,7 +1,7 @@
 @import "tachyons";
 
 .App {
-  margin-top: 50px;
+  margin-top: 20px;
 }
 
 input {
@@ -14,4 +14,8 @@ input {
 
 body {
   background-color: whitesmoke;
+}
+
+.item-btns {
+  margin-left: 20px !important;
 }

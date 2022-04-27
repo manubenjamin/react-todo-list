@@ -6,7 +6,7 @@ import ConfirmationWindow from "../../components/ConfirmationWindow";
 import { Button } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../../models/state";
-import { deleteTodo } from "../../actions/todoAction";
+import { deleteTodo, markStatusTodo } from "../../actions/todoAction";
 
 const TodoList: React.FC = () => {
   const todos = useSelector((state: State) => state.todos);
@@ -19,7 +19,10 @@ const TodoList: React.FC = () => {
     completed: false,
   });
 
-  const handleToggle = (todo: Todo) => {};
+  const handleToggle = (todo: Todo) => {
+    todo.completed = !todo.completed;
+    dispatch(markStatusTodo(todo));
+  };
 
   const handleAddTodo = () => {
     navigate(`add-todo`);
