@@ -1,15 +1,15 @@
 import {
   ADD_TODO,
   DELETE_TODO,
-  MARK_STATUS,
+  MARK_TODO,
   UPDATE_TODO,
 } from "../actions/types";
 import { State } from "../models/state";
 
 const initialState: State = {
   todos: [
-    { id: "abcd", todoName: "Learn React", completed: false },
-    { id: "abce", todoName: "Learn Redux", completed: true },
+    { id: "1234567", todoName: "Electricty Bill Payment", completed: false },
+    { id: "2345678", todoName: "Purchase Groceries", completed: true },
   ],
 };
 
@@ -24,18 +24,17 @@ export default function todoReducer(state: State = initialState, action: any) {
       );
       return { ...state, todos: activeTodos };
     case UPDATE_TODO:
-      const index = state.todos.findIndex(
-        (todo) => todo.id === action.payload.id
-      );
-      state.todos[index].todoName = action.payload.todoName;
-      state.todos[index].completed = action.payload.completed;
-      return state;
-    case MARK_STATUS:
-      const itemIndex = state.todos.findIndex(
-        (todo) => todo.id === action.payload.id
-      );
-      state.todos[itemIndex].completed = action.payload.completed;
-      return state;
+      const updatedTodos = state.todos.map((todo) => {
+        return todo.id === action.payload.id ? action.payload : todo;
+      });
+      return { ...state, todos: updatedTodos };
+    case MARK_TODO:
+      const markedTodos = state.todos.map((todo) => {
+        return todo.id === action.payload.id
+          ? { ...todo, completed: action.payload.completed }
+          : todo;
+      });
+      return { ...state, todos: markedTodos };
     default:
       return state;
   }

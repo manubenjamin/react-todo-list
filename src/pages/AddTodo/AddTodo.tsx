@@ -8,7 +8,7 @@ import { addTodo } from "../../actions/todoAction";
 import { useDispatch } from "react-redux";
 
 const validationSchema = yup.object({
-  todoName: yup.string().required("Todo is required"),
+  todoName: yup.string().required("Todo name is required"),
 });
 
 const AddTodo: React.FC = () => {
@@ -40,7 +40,7 @@ const AddTodo: React.FC = () => {
     <div className="flex justify-center">
       <div className="w-50-l w-100">
         <div className="h3 w-100 flex justify-between items-center ph3 bg-white bb b--black-10">
-          <div className="lh-title f5 b">Add todo</div>
+          <div className="lh-title f5 b">Add Todo</div>
           <div>
             <Button
               color="primary"

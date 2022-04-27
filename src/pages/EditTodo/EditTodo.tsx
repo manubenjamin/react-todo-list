@@ -9,7 +9,7 @@ import { State } from "../../models/state";
 import { updateTodo } from "../../actions/todoAction";
 
 const validationSchema = yup.object({
-  todoName: yup.string().required("Todo is required"),
+  todoName: yup.string().required("Todo name is required"),
 });
 
 const EditTodo: React.FC = () => {
@@ -26,8 +26,13 @@ const EditTodo: React.FC = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      todo.todoName = values.todoName;
-      dispatch(updateTodo(todo));
+      dispatch(
+        updateTodo({
+          id: todo.id,
+          todoName: values.todoName,
+          completed: todo.completed,
+        })
+      );
       navigate("/");
     },
   });
@@ -40,7 +45,7 @@ const EditTodo: React.FC = () => {
     <div className="flex justify-center">
       <div className="w-50-l w-100">
         <div className="h3 w-100 flex justify-between items-center ph3 bg-white bb b--black-10">
-          <div className="lh-title f5 b">Edit todo</div>
+          <div className="lh-title f5 b">Edit Todo</div>
           <div>
             <Button
               color="primary"

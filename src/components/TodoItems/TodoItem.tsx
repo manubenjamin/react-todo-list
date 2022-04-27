@@ -6,7 +6,7 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import { EditOutlined, DeleteOutline } from "@mui/icons-material";
 import { Todo } from "../../models/todo";
-import React, { useState } from "react";
+import React from "react";
 
 interface ItemProps {
   todo: Todo;
@@ -21,8 +21,7 @@ const TodoItem: React.FC<ItemProps> = ({
   handleEdit,
   handleDelete,
 }) => {
-  const [checked, setChecked] = useState(todo.completed);
-  const markCompletedStyle = checked ? "strike" : "";
+  const markCompletedStyle = todo.completed ? "strike" : "";
   return (
     <ListItem
       key={todo.id}
@@ -52,10 +51,9 @@ const TodoItem: React.FC<ItemProps> = ({
         <ListItemIcon>
           <Checkbox
             edge="start"
-            checked={checked}
+            checked={todo.completed}
             onChange={() => {
               handleToggle(todo);
-              setChecked(!checked);
             }}
             tabIndex={-1}
             disableRipple
@@ -66,7 +64,6 @@ const TodoItem: React.FC<ItemProps> = ({
           id={todo.id}
           onClick={() => {
             handleToggle(todo);
-            setChecked(!checked);
           }}
           className={`${markCompletedStyle}`}
         >

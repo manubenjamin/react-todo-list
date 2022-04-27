@@ -20,8 +20,9 @@ const TodoList: React.FC = () => {
   });
 
   const handleToggle = (todo: Todo) => {
-    todo.completed = !todo.completed;
-    dispatch(markStatusTodo(todo));
+    const todoItem = { ...todo };
+    todoItem.completed = !todoItem.completed;
+    dispatch(markStatusTodo(todoItem));
   };
 
   const handleAddTodo = () => {
